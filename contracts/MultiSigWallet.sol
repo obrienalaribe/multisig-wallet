@@ -182,6 +182,7 @@ contract MultiSigWallet is EIP712 {
             _executeRemoveSigner(transaction.data);
             success = true;
         } else {
+            require(transaction.value <= address(this).balance, "Insufficient balance");
             (bool result, ) = transaction.to.call{value: transaction.value}(transaction.data);
             success = result;
         }

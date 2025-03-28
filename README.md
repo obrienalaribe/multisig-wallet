@@ -8,8 +8,7 @@ This solution implements a MultiSig Wallet contract that meets the following req
 -   [x] Must be able to update the signer set.
 -   [x] Includes operational scripts that demonstrate deployment.
     -   [x] How to initialize the initial signer set.
--   [x] Security, Design, and Mainnet deployment considerations.
--   [x] Basic tests for the contract.
+-   [x] Tests cases for the contract.
 -   [x] CLI tool to interact with methods.
     -   [x] Generate a transfer transaction to be signed by a signer set.
     -   [x] Updating signer set transaction.
@@ -82,7 +81,12 @@ npx hardhat multisig:pending --network localhost
 This task allows you to impersonate signers. The list of whitelisted signers will print on the CLI for you to choose one
 
 ```bash
-npx hardhat multisig:confirm --id <txID> --signer 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --network localhost
+npx hardhat multisig:confirm --id <txID> --signer <address> --network localhost
+```
+
+#### Run Tests
+```bash
+ npx hardhat test
 ```
 
 ### Design Decisions
@@ -106,3 +110,4 @@ No `try-catch` blocks are used for the low-level function `call` since it return
 
 #### Signature Scheme
 The signature scheme uses exact contract values from the contract by getting the transaction data directly and using that for signing. This ensures hash consistency and relies on on-chain data rather than recreating it locally on the client-side, although there are tradeoffs here.
+
