@@ -236,7 +236,6 @@ contract MultiSigWallet is EIP712 {
     }
 
     function getSignerCount() external view returns (uint) {
-            console.log("getSignerCount called");
         return signers.length;
     }
   
