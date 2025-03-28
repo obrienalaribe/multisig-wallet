@@ -33,9 +33,9 @@ This solution implements a MultiSig Wallet contract that meets the following req
 1.  Clone the repository.
 2.  Install dependencies:
 
-    ```bash
-    npm install
-    ```
+```bash
+npm install
+```
 
 ### Running the Project
 
@@ -46,8 +46,8 @@ npx hardhat node
 ```
 
 
-### Initializing envs
-Initializing the signer set and threshold are optional for local deployment. For local testing, the ignition deployment module checks for this and deploys with the test signer accounts with a 2 / 3 signature requirement
+#### Initializing envs (optional)
+Initializing the signer set and threshold are **optional for local deployment.** For local testing, the ignition deployment module checks for this and deploys with the test signer accounts with a `2/3 signature threshold set`
 
 ```bash
 INITIAL_SIGNERS="<address_1>,<address_2>"
