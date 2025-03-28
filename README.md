@@ -55,10 +55,11 @@ THRESHOLD=1
 ```
 #### Deploy Contract
 ```bash
-rm -rf ./ignition/deployments && npx hardhat ignition deploy ./ignition/modules/MultiSigWallet.ts --network localhost
+npx hardhat ignition deploy ./ignition/modules/MultiSigWallet.ts --network localhost
 ```
 
-#### Script to run through simple transaction flow
+#### Script
+This script is used to run through simple transaction flow methods on the smart contract to quickly verify its working as intended
 ```bash
 npx hardhat run scripts/run.ts --network localhost
 ```
