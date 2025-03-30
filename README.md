@@ -44,14 +44,14 @@ npm install
 npx hardhat node
 ```
 
-
 #### Initializing envs (optional)
-Initializing the signer set and threshold are **optional for local deployment.** For local testing, the ignition deployment module checks for this and deploys with the test signer accounts with a `2/3 signature threshold set`
+Initializing the signer set and threshold are **optional for local deployment.** For local testing, the ignition deployment module checks for this and deploys with the test signer accounts with a `2/3 signature threshold set`. Otherwise you can set your `.env` as below:
 
 ```bash
 INITIAL_SIGNERS="<address_1>,<address_2>"
-THRESHOLD=1
+THRESHOLD=k
 ```
+
 #### Deploy Contract
 ```bash
 npx hardhat ignition deploy ./ignition/modules/MultiSigWallet.ts --network localhost
@@ -59,11 +59,20 @@ npx hardhat ignition deploy ./ignition/modules/MultiSigWallet.ts --network local
 
 ### CLI Interaction with contract
 
-#### Submit an arbitrary transaction
-
+#### Get Balance of account
 ```bash
-npx hardhat multisig:submit --network localhost
+npx hardhat balance --account 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 --network localhost
 ```
+
+#### Get all signers
+```bash
+npx hardhat multisig:signers --network localhost
+```
+
+#### Add a new signer
+```bash
+ npx hardhat multisig:addSigner --address 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199 --network localhost
+ ```
 
 #### View pending transactions
 ```bash
@@ -72,11 +81,19 @@ npx hardhat multisig:pending --network localhost
 
 #### Sign a transaction 
 
-This task allows you to impersonate signers. The list of whitelisted signers will print on the CLI for you to choose one
+This task allows you to impersonate signers. The signer set will print on the CLI for you to choose one. *Remember to set the ID to that given when you submitted the transaction*
 
 ```bash
-npx hardhat multisig:confirm --id <txID> --signer <address> --network localhost
+npx hardhat multisig:confirm --id 0 --signer 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 --network localhost
+
+npx hardhat multisig:confirm --id 0 --signer 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC --network localhost
 ```
+
+#### Submit an arbitrary transfer transaction
+```bash
+ npx hardhat multisig:transfer --to 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 --value 1 --network localhost
+ ```
+
 
 #### Run Tests
 ```bash

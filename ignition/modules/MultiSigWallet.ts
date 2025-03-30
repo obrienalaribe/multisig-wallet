@@ -28,7 +28,7 @@ const msWalletModule = buildModule("MultiSigWalletModule", (m) => {
 
   const msWallet = m.contract("MultiSigWallet", [signers, threshold]);
 
-  const ONE_ETH = 1_000_000_000_000_000_000n
+  const ONE_ETH = 10_000_000_000_000_000_000n
 
   m.send("Send_ETH_To_Deployed_Contract", msWallet, ONE_ETH);
   

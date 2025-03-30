@@ -4,7 +4,6 @@ const { vars } = require("hardhat/config");
 import "@nomicfoundation/hardhat-ethers";
 
 import "./tasks/multisig";
-import "./tasks/pending-tx.ts"
 
 const SEPOLIA_PRIVATE_KEY = vars.get("SEPOLIA_PRIVATE_KEY");
 

@@ -71,6 +71,11 @@ contract MultiSigWallet is EIP712 {
         emit Deposited(msg.sender, msg.value);
     }
 
+    modifier transactionExists(uint _transactionId) {
+        require(_transactionId < transactionId, "Transaction does not exist");
+        _;
+    }
+
     function submitTransaction(address _to, uint256 _value, bytes calldata _data, uint8 _txType) external {
         Transaction memory newTransaction = Transaction({
             to: _to,
@@ -93,7 +98,8 @@ contract MultiSigWallet is EIP712 {
         transactionId++;
     }
 
-    function confirmTransaction(uint _transactionId, bytes calldata _signature, bytes32 _txHash) external {
+    function confirmTransaction(uint _transactionId, bytes calldata _signature, bytes32 _txHash)
+        external transactionExists(_transactionId) {
         require(isSigner[msg.sender], "Not a signer");
         require(!confirmations[_transactionId][msg.sender], "Already confirmed");
         require(transactions[_transactionId].state == TransactionState.Pending, "Transaction not pending");
@@ -125,7 +131,7 @@ contract MultiSigWallet is EIP712 {
         }
     }
 
-    function calculateHash(uint _transactionId) public view returns (bytes32 txHash){
+    function calculateHash(uint _transactionId) public view transactionExists(_transactionId) returns (bytes32 txHash){
        return _hashTypedDataV4(
             keccak256(abi.encode(
                 _TRANSACTION_TYPEHASH,
@@ -138,7 +144,7 @@ contract MultiSigWallet is EIP712 {
         );
     }
 
-    function cancelTransaction(uint _transactionId) external {
+    function cancelTransaction(uint _transactionId) external transactionExists(_transactionId){
         require(isSigner[msg.sender], "Not a signer");
         require(transactions[_transactionId].state == TransactionState.Pending, "Transaction not pending");
         
@@ -151,7 +157,7 @@ contract MultiSigWallet is EIP712 {
     }
     
     // Helper function to remove a transaction from the pending list
-    function _removePendingTransaction(uint _transactionId) private {
+    function _removePendingTransaction(uint _transactionId) private  {
         uint index = pendingTxIndex[_transactionId];
         uint lastIndex = pendingTransactions.length - 1;
         
@@ -167,7 +173,8 @@ contract MultiSigWallet is EIP712 {
         delete pendingTxIndex[_transactionId];
     }
 
-    function _executeTransaction(uint _transactionId) private {
+    function _executeTransaction(uint _transactionId) 
+        private transactionExists(_transactionId){
         require(transactions[_transactionId].confirmations >= threshold, "Not enough confirmations");
         require(transactions[_transactionId].state == TransactionState.Pending, "Transaction not pending");
         
