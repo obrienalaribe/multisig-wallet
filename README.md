@@ -5,20 +5,16 @@ This solution implements a MultiSig Wallet contract that meets the following req
 -   [x] The contract supports multisig operations for executing arbitrary calls on other contracts.
     -   [x] K of n signature scheme.
     -   [x] Allows any actor to execute an arbitrary method on an arbitrary contract. K valid signatures must be attached to the transaction.
--   [x] Must be able to update the signer set.
--   [x] Includes operational scripts that demonstrate deployment.
-    -   [x] How to initialize the initial signer set.
--   [x] Tests cases for the contract.
--   [x] CLI tool to interact with methods.
-    -   [x] Generate a transfer transaction to be signed by a signer set.
-    -   [x] Updating signer set transaction.
-    -   [x] Demonstrate each participant can sign the transaction.
+-   [x] Includes operational scripts that demonstrate deployment and how to initialize the initial signer set.
+-   [x] Tests cases for the contract edge cases
+-   [x] CLI tool to interact with contract methods to:
+    -   [x] Generate a transfer transaction to be confirmed by k signers in the set.
+    -   [x] Able to add and remove signers.
+    -   [x] Demonstrate each participant can sign a transaction.
     -   [x] Execute the transaction only after k of n signatures are provided.
-    -   [x] The operational scripts handle both the submission and verification of the multisig transaction, showing how an external party can interact with the contract.
-    -   [x] Contains a signature scheme.
-    -   [x] Stores signer addresses and their status.
-    -   [x] Maintains a threshold of required confirmations.
-    -   [x] Functions to add and remove signers through transactions.
+    -   [x] The operational scripts handle both the submission and verification of response from multisig contract, showing how an external party can interact with the contract.
+    -   [x] Contains a signature scheme
+    -   [x] Track total confirmations for a transaction and its status.
 
 ## Getting Started
 
