@@ -117,4 +117,3 @@ No `try-catch` blocks are used for the low-level function `call` since it return
 
 #### Signature Scheme
 The signature scheme uses exact contract values from the contract by getting the transaction data directly and using that for signing. This ensures hash consistency and relies on on-chain data rather than recreating it locally on the client-side, although there are tradeoffs here.
-

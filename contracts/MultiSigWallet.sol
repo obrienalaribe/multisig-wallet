@@ -39,7 +39,7 @@ contract MultiSigWallet is EIP712 {
     uint[] public pendingTransactions;
     mapping(uint => uint) private pendingTxIndex;
     
-    
+
     bytes32 private constant _TRANSACTION_TYPEHASH = keccak256(
         "Transaction(address to,uint256 value,bytes data,uint256 nonce,uint8 txType)"
     );
